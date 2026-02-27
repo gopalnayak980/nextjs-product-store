@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Student Sign Up</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #4f46e5, #06b6d4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Marquee Header */
+        .marquee-box {
+            width: 100%;
+            background: rgba(0,0,0,0.2);
+            color: #fff;
+            padding: 10px 0;
+            font-size: 18px;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .container {
+            background: #fff;
+            padding: 30px 25px;
+            width: 100%;
+            max-width: 420px;
+            border-radius: 14px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+            animation: fadeInUp 0.8s ease;
+            margin-top: 20px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        /* Inner box for form */
+        .form-box {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: inset 0 0 0 rgba(0,0,0,0), 0 8px 20px rgba(0,0,0,0.08);
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        /* Input box with shadow */
+        input {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            outline: none;
+            font-size: 14px;
+            background: #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            transition: border 0.3s, box-shadow 0.3s, transform 0.2s;
+        }
+
+        input:focus {
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79,70,229,0.15), 0 6px 14px rgba(0,0,0,0.12);
+            transform: translateY(-1px);
+        }
+
+        .error {
+            color: red;
+            font-size: 13px;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background: #4f46e5;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(79,70,229,0.4);
+            transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-submit:hover {
+            background: #4338ca;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(79,70,229,0.5);
+        }
+
+        .footer-text {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .footer-text a {
+            color: #4f46e5;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Marquee -->
+    <div class="marquee-box">
+        <marquee behavior="scroll" direction="left">
+            🎓 Welcome to Student Portal | Learn • Grow • Succeed 🚀 | Please Sign Up to Continue
+        </marquee>
+    </div>
+
+    <div class="container">
+        <h1>Student Sign Up 📝</h1>
+        <div class="subtitle">Create your account to get started ✨</div>
+
+        <div class="form-box">
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="name">👤 Name</label>
+                    <input type="text" id="name" placeholder="Enter your name" />
+                    <div class="error" id="nameError">Name is required</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">📧 Email</label>
+                    <input type="email" id="email" placeholder="Enter your email" />
+                    <div class="error" id="emailError">Enter a valid email</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">🔒 Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" />
+                    <div class="error" id="passwordError">Password must be at least 6 characters</div>
+                </div>
+
+                <button type="submit" class="btn-submit">🚀 Sign Up</button>
+            </form>
+        </div>
+
+        <div class="footer-text">
+            Already have an account? <a href="login.html">Go to Login</a>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById("signupForm");
+        const nameInput = document.getElementById("name");
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
+
+        const nameError = document.getElementById("nameError");
+        const emailError = document.getElementById("emailError");
+        const passwordError = document.getElementById("passwordError");
+
+        form.addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            let isValid = true;
+
+            if (nameInput.value.trim() === "") {
+                nameError.style.display = "block";
+                isValid = false;
+            } else {
+                nameError.style.display = "none";
+            }
+
+            if (emailInput.value.trim() === "" || !emailInput.value.includes("@")) {
+                emailError.style.display = "block";
+                isValid = false;
+            } else {
+                emailError.style.display = "none";
+            }
+
+            if (passwordInput.value.length < 6) {
+                passwordError.style.display = "block";
+                isValid = false;
+            } else {
+                passwordError.style.display = "none";
+            }
+
+            if (isValid) {
+                alert("✅ Sign Up Successful! (Demo)");
+                form.reset();
+            }
+        });
+    </script>
+
+</body>
+</html>
